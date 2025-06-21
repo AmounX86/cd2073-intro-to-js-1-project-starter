@@ -1,4 +1,29 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
+let cherry = {
+  name: "Cherry",
+  price: 10.00,
+  quantity: 0,
+  productId: 1,
+  image: "images/cherry.jpg"
+}
+
+let orange = {
+  name: "Orange",
+  price: 9.99,
+  quantity: 0,
+  productId: 2,
+  image: "images/orange.jpg"
+}
+
+let strawBerry = {
+  name: "Strawberry",
+  price: 23.35,
+  quantity: 0,
+  productId: 3,
+  image: "images/strawberry.jpg"
+}
+
+let products = [cherry, orange, strawBerry];
 
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
@@ -16,45 +41,59 @@
 */
 
 /* Declare an empty array named cart to hold the items in the cart */
-
+let cart = [];
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
+function addProductToCart(productId){
 
+}
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
+function increaseQuantity(productId){
 
+}
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
   - decreaseQuantity should decrease the quantity of the product
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
+function decreaseQuantity(productId){
 
+}
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
   - removeProductFromCart should update the product quantity to 0
   - removeProductFromCart should remove the product from the cart
 */
+function removeProductFromCart(productId){
 
+}
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total cost of all products
   - cartTotal should return the total cost of the products in the cart
   Hint: price and quantity can be used to determine total cost
 */
+function cartTotal(){
 
+}
 /* Create a function called emptyCart that empties the products from the cart */
+function emptyCart(){
 
+}
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+function pay(amount){
 
+}
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 
