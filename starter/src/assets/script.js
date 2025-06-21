@@ -48,14 +48,24 @@ let cart = [];
   - if the product is not already in the cart, add it to the cart
 */
 function addProductToCart(productId){
-
+  let cartIndex = cart.findIndex(x=>x.productId == productId);
+  let tempProduct = {};
+  if(cartIndex < 0){
+    tempProduct = products.find(x=>x.productId == productId);
+    tempProduct.quantity = 1;
+    cart.push(tempProduct);
+  }
+  else{
+    cart[cartIndex].quantity += 1;
+  }
 }
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
 function increaseQuantity(productId){
-
+  let cartIndex = cart.findIndex(x=>x.productId == productId);
+  cart[cartIndex].quantity += 1;
 }
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
@@ -63,7 +73,14 @@ function increaseQuantity(productId){
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
 function decreaseQuantity(productId){
-
+  let cartIndex = cart.findIndex(x=>x.productId == productId);
+  if (cartIndex > -1) {
+    cart[cartIndex].quantity -= 1;
+    if(cart[cartIndex].quantity <= 0){
+      removeProductFromCart(productId);
+    }
+  }
+  
 }
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
@@ -71,7 +88,9 @@ function decreaseQuantity(productId){
   - removeProductFromCart should remove the product from the cart
 */
 function removeProductFromCart(productId){
-
+  let cartIndex = cart.findIndex(x=>x.productId == productId);
+  cart[cartIndex].quantity = 0;
+  cart.splice(cartIndex, 1);
 }
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total cost of all products
@@ -79,11 +98,15 @@ function removeProductFromCart(productId){
   Hint: price and quantity can be used to determine total cost
 */
 function cartTotal(){
-
+  let grossTotal = 0;
+  cart.forEach((item, index)=>{
+    grossTotal += item.price * item.quantity;
+  });
+  return grossTotal;
 }
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart(){
-
+  emptyCart = [];
 }
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
@@ -92,7 +115,7 @@ function emptyCart(){
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
 function pay(amount){
-
+  return amount - cartTotal();
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
