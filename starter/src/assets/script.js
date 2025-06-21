@@ -42,11 +42,12 @@ let products = [cherry, orange, strawBerry];
 
 /* Declare an empty array named cart to hold the items in the cart */
 let cart = [];
-/* Create a function named addProductToCart that takes in the product productId as an argument
-  - addProductToCart should get the correct product based on the productId
-  - addProductToCart should then increase the product's quantity
-  - if the product is not already in the cart, add it to the cart
-*/
+
+/**
+ * @description Takes the product id and add the correct product and update
+ * quantity of the product in the cart (no duplication)
+ * @param {integer} productId = product ID
+ */
 function addProductToCart(productId){
   let cartIndex = cart.findIndex(x=>x.productId == productId);
   let tempProduct = {};
@@ -59,19 +60,20 @@ function addProductToCart(productId){
     cart[cartIndex].quantity += 1;
   }
 }
-/* Create a function named increaseQuantity that takes in the productId as an argument
-  - increaseQuantity should get the correct product based on the productId
-  - increaseQuantity should then increase the product's quantity
-*/
+
+/**
+ * @description Increase the quantity of the product iin the cart by 1
+ * @param {integer} productId = product ID
+ */
 function increaseQuantity(productId){
   let cartIndex = cart.findIndex(x=>x.productId == productId);
   cart[cartIndex].quantity += 1;
 }
-/* Create a function named decreaseQuantity that takes in the productId as an argument
-  - decreaseQuantity should get the correct product based on the productId
-  - decreaseQuantity should decrease the quantity of the product
-  - if the function decreases the quantity to 0, the product is removed from the cart
-*/
+
+/**
+ * @description decrease product quantity by 1 and if reached zero remove from the cart
+ * @param {integer} productId 
+ */
 function decreaseQuantity(productId){
   let cartIndex = cart.findIndex(x=>x.productId == productId);
   if (cartIndex > -1) {
@@ -87,38 +89,73 @@ function decreaseQuantity(productId){
   - removeProductFromCart should update the product quantity to 0
   - removeProductFromCart should remove the product from the cart
 */
+/**
+ * @description remove the product for the cart
+ * @param {integer} productId 
+ */
 function removeProductFromCart(productId){
   let cartIndex = cart.findIndex(x=>x.productId == productId);
   cart[cartIndex].quantity = 0;
   cart.splice(cartIndex, 1);
 }
-/* Create a function named cartTotal that has no parameters
-  - cartTotal should iterate through the cart to get the total cost of all products
-  - cartTotal should return the total cost of the products in the cart
-  Hint: price and quantity can be used to determine total cost
-*/
+
+/**
+ * @description calculate the cart total amount
+ * @returns {Number}
+ */
 function cartTotal(){
   let grossTotal = 0;
-  cart.forEach((item, index)=>{
+  cart.forEach((item)=>{
     grossTotal += item.price * item.quantity;
   });
   return grossTotal;
 }
-/* Create a function called emptyCart that empties the products from the cart */
+
+/**
+ * @description empties the products from the cart
+ */
 function emptyCart(){
-  emptyCart = [];
+  cart = [];
 }
-/* Create a function named pay that takes in an amount as an argument
-  - amount is the money paid by customer
-  - pay will return a negative number if there is a remaining balance
-  - pay will return a positive number if money should be returned to customer
-  Hint: cartTotal function gives us cost of all the products in the cart  
-*/
+
+/**
+ * @description pay the total amount of the cart
+ * @param {number} amount 
+ * @returns {number}
+ */
 function pay(amount){
   return amount - cartTotal();
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
+const currencyConverter = {
+  oldFactor: 1.0,
+  newFactor: 1.0
+}
 
+function updatePrices(){
+  products.forEach((item)=>{
+    item.price = item.price / currencyConverter.oldFactor * currencyConverter.newFactor;
+  });
+  currencyConverter.oldFactor = currencyConverter.newFactor;
+}
+
+function currency(currency){
+  switch(currency){
+        case 'EUR':
+            currencySymbol = '€';
+            currencyConverter.newFactor = 1.2
+            break;
+        case 'YEN':
+            currencySymbol = '¥';
+            currencyConverter.newFactor = 0.8
+            break;
+        default:
+            currencySymbol = '$';
+            currencyConverter.newFactor = 1.0;
+            break;
+     }
+     updatePrices();
+}
 
 /* The following is for running unit tests. 
    To fully complete this project, it is expected that all tests pass.
@@ -137,5 +174,5 @@ module.exports = {
    pay, 
    emptyCart,
    /* Uncomment the following line if completing the currency converter bonus */
-   // currency
+   currency
 }
