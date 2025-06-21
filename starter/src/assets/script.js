@@ -132,6 +132,9 @@ const currencyConverter = {
   newFactor: 1.0
 }
 
+/**
+ * @description update the prices of all products to the new currency, then update the old coversion rate
+ */
 function updatePrices(){
   products.forEach((item)=>{
     item.price = item.price / currencyConverter.oldFactor * currencyConverter.newFactor;
@@ -139,6 +142,10 @@ function updatePrices(){
   currencyConverter.oldFactor = currencyConverter.newFactor;
 }
 
+/**
+ * @description set the new conversion factor
+ * @param {string} currency 
+ */
 function currency(currency){
   switch(currency){
         case 'EUR':
